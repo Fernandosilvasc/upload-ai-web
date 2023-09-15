@@ -1,11 +1,11 @@
-import { ThemeProvider } from "@/contexts/theme-provider";
+import AppContextProvider from "@/contexts/app-context-providers";
 import { Home } from "@/components";
 
 export function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    <AppContextProvider>
       <Home />
-    </ThemeProvider>
+    </AppContextProvider>
   )
 }
 

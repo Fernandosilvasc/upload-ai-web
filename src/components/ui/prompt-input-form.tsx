@@ -8,6 +8,7 @@ import {
   SelectContent,
   SelectItem,
   Slider,
+  PromptSelect,
 } from "@/components";
 import { Wand2 } from "lucide-react";
 
@@ -16,15 +17,7 @@ export function PromptInputForm() {
     <form className='w-full space-y-6'>
       <div className='space-y-2'>
         <Label>Prompt</Label>
-        <Select>
-          <SelectTrigger>
-            <SelectValue placeholder='Select the prompt...' />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value='title'>Youtube title</SelectItem>
-            <SelectItem value='description'>Youtube Description</SelectItem>
-          </SelectContent>
-        </Select>
+        <PromptSelect />
       </div>
 
       <Separator />
