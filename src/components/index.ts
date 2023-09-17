@@ -10,7 +10,7 @@ import { PromptInputForm } from '@/components/ui/prompt-input-form';
 import { PromptSelect } from '@/components/ui/prompt-select';
 import { Header } from '@/components/ui/header';
 import { Footer } from '@/components/ui/footer';
-import { PromptContainer } from '@/components/ui/prompt-container';
+import { PromptTextAreaContainer } from '@/components/ui/prompt-textarea-container';
 import { Home } from '@/components/home';
 
 export {
@@ -29,7 +29,7 @@ export {
   PromptInputForm,
   Header,
   Footer,
-  PromptContainer,
+  PromptTextAreaContainer,
   Home,
   PromptSelect
 }

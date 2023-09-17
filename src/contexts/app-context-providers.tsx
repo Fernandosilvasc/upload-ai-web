@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ThemeProvider } from "@/contexts/theme-provider";
-import { PromptContextProvider } from '@/contexts/prompt-context'
-
+import { PromptContextProvider } from '@/contexts/prompt-context';
+import {SelectedVideoContextProvider} from '@/contexts/video-context';
 interface CombinedContextProviderProps {
   children: ReactNode;
 }
@@ -15,9 +15,11 @@ const AppContextProvider = ({
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <QueryClientProvider client={queryClient}>
-        <PromptContextProvider>
-          {children}
-        </PromptContextProvider>
+        <SelectedVideoContextProvider>
+          <PromptContextProvider>
+            {children}
+          </PromptContextProvider>
+        </SelectedVideoContextProvider>
       </QueryClientProvider>
     </ThemeProvider>
   );

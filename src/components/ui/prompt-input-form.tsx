@@ -1,3 +1,4 @@
+import { Wand2 } from "lucide-react";
 import { 
   Button, 
   Separator, 
@@ -10,14 +11,31 @@ import {
   Slider,
   PromptSelect,
 } from "@/components";
-import { Wand2 } from "lucide-react";
 
-export function PromptInputForm() {
+interface IPromptInputForm {
+  temperature: number;
+  onTemperatureChange: (temperature: number) => void;
+  handleSetPrompt: React.Dispatch<React.SetStateAction<string>>
+  handleOnSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+  isPromptLoading: boolean
+}
+
+export function PromptInputForm({ 
+  temperature, 
+  onTemperatureChange,
+  handleSetPrompt,
+  handleOnSubmit,
+  isPromptLoading
+}: IPromptInputForm) {
+
   return (
-    <form className='w-full space-y-6'>
+    <form 
+      onSubmit={handleOnSubmit}    
+      className='w-full space-y-6'
+    >
       <div className='space-y-2'>
         <Label>Prompt</Label>
-        <PromptSelect />
+        <PromptSelect handlePromptSelectedChange={handleSetPrompt} />
       </div>
 
       <Separator />
@@ -39,13 +57,20 @@ export function PromptInputForm() {
 
       <div className='space-y-4'>
         <Label>Temperature</Label>
-        <Slider min={0} max={1} step={0.1} />
+        <Slider 
+          min={0}
+          max={1}
+          step={0.1}
+          value={[temperature]}
+          onValueChange={value => onTemperatureChange(value[0])}
+        />
         <span className='flex text-xs text-muted-foreground italic leading-relaxed'>Higher values tend to make the result more creative, but there may be inconsistency in the response.</span>
       </div>
 
       <Separator />
 
       <Button
+        disabled={isPromptLoading}
         type='submit'
         className='w-full gap-2 text-sm
       '>

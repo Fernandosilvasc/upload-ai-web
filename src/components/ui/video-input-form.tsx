@@ -9,6 +9,7 @@ import { ChangeEvent, FormEvent, useMemo, useRef, useState } from 'react';
 import { getFFmpeg } from '@/lib/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { api } from '@/lib/axios';
+import { useSelectedVideo } from '@/contexts/video-context';
 
 enum Status {
   WAITING = 'waiting',
@@ -26,6 +27,7 @@ const statusMessage = {
 }
 
 export function VideoInputForm() {
+  const { setSelectedVideo } = useSelectedVideo();
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [status, setStatus] = useState<Status>(Status.WAITING);
 
@@ -101,7 +103,7 @@ export function VideoInputForm() {
 
     setStatus(Status.UPLOADING)
     const response = await api.post('/videos', data)
-
+    setSelectedVideo(response.data.video);
     const videoId = response.data.video.id;
 
     setStatus(Status.GENERATING)
